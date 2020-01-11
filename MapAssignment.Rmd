@@ -1,0 +1,35 @@
+---
+title: "Map of 6 Point NYC Tour"
+author: "NEO"
+date: "1/11/2020"
+output: html_document
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Overview
+This html map is developed using Rmarkdown and the leaflet library in RStudio to provide evidence of completion of week 2 course practical requirement in the Coursera Developing Data Products course. 
+```{r leaflet, echo=FALSE}
+library(leaflet)
+
+NycLatLong <- data.frame(
+  lat = c(40.69050, 40.6985, 40.70692, 40.76507, 40.772835, 40.728807),
+  lng = c(-74.046, -74.042, -74.01112, -73.980054, -73.984627, -73.989684))
+
+NycSites <- c(
+  "<a href='https://www.nps.gov/stli/index.htm/'>Statue of Liberty</a>",
+  "<a href='https://www.nps.gov/elis/index.htm/'>Ellis Island/<a>",
+  "<a href='https://www.nyse.com/index/'>NewYork Stock Exchange</a>",
+  "<a href='https://www.carnegiehall.org/'>Carnegie Hall</a>",
+  "<a href='https://www.metopera.org/'>Metropolitan Opera House</a>",
+  "<a href='https://mcsorleysoldalehouse.nyc/'>McSorleys Old Ale House</a>"
+)
+
+NycLatLong %>% 
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(clusterOptions = markerClusterOptions(),popup = NycSites)
+```
+
